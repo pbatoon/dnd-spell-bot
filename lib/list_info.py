@@ -30,18 +30,24 @@ def list_all(data):
     return output
 
 
-def list_damage(data):
-    name = '**Name:** ' + data['name']
-    output_list = [name]
-
-    for key, value in data['damage'].items():
-        # cap_key = key.replace('_', ' ').capitalize()
-        if key == 'damage_type':
-            out_string = f"**Damage Type:** {value['name']}"
-            output_list.append(out_string)
-        if key == 'damage_at_slot_level':
-            for level, dice in value:
-                # TODO: add functionality to add dice per level to embed
+def list_damage_type(data):
+    output_list = []
+    name = '**Name:** ' + data["name"]
+    desc = '**Description:** ' + data["desc"][0]
+    damage_type = '**Damage Type:** ' + data["damage"]["damage_type"]["name"]
+    output_list.append(name)
+    output_list.append(desc)
+    output_list.append(damage_type)
 
     output = '\n'.join([str(i) for i in output_list])
+    return output
+
+
+def damage_at_slot_level(data, slot_level):
+    output_list = []
+    for level, dice in data['damage']['damage_at_slot_level'].items():
+        if level == str(slot_level):
+            output = level + '->' + dice
+
+    # output = '\n'.join([str(i) for i in output_list])
     return output
