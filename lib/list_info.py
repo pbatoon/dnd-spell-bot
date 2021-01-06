@@ -19,6 +19,10 @@ def list_all(data):
             out_string = f"**{cap_key}:** {value[0]}"
             output_list.append(out_string)
 
+        elif key == 'desc' and len(value) > 1:
+            desc = f"**{cap_key}:** " + '\n'.join([str(i) for i in value])
+            output_list.append(desc)
+
         # For the 'components' value ONLY
         elif key == 'components':
             c_string = f"**{cap_key}:** " + ', '.join([str(c) for c in value])
@@ -40,14 +44,4 @@ def list_damage_type(data):
     output_list.append(damage_type)
 
     output = '\n'.join([str(i) for i in output_list])
-    return output
-
-
-def damage_at_slot_level(data, slot_level):
-    output_list = []
-    for level, dice in data['damage']['damage_at_slot_level'].items():
-        if level == str(slot_level):
-            output = level + '->' + dice
-
-    # output = '\n'.join([str(i) for i in output_list])
     return output
