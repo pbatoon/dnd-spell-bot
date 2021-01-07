@@ -1,1 +1,8 @@
+os
+requests
+json
+typing
+lib
+dotenv
+discord.ext
 discord.py
